@@ -1,14 +1,24 @@
-mapaBR <- function(df, titulo="Mapa", esquemaCor="Blues") {
-  #### Pacotes ####
-  require(maptools)
-  require(cartography)
-  require(tmap)
-  require(leaflet)
-  require(dplyr)
-  require(rgdal)
-  require(dplyr)
-  require(RColorBrewer)
+mapaBR <- function(df, titulo="Mapa", esquemaCor="Blues", numeroCores=10) {
 
+  # ========================================================================== #
+  #                                                                            #
+  # sobre: função criada para gerar mapas                                      #
+  #                                                                            #
+  # data: 08/03/2022 <João Pedro Colantuono>                                   #
+  # versão: 08/03/2022                                                         #
+  #                                                                            #
+  # ========================================================================== #
+
+options(warn = - 1)
+
+  #### Pacotes ####
+  if(!require(dplyr)){install.packages("dplyr",repos="http://cran-r.c3sl.ufpr.br");require(dplyr);}
+  if(!require(leaflet)){install.packages("leaflet",repos="http://cran-r.c3sl.ufpr.br");require(leaflet);}
+  if(!require(RColorBrewer)){install.packages("RColorBrewer",repos="http://cran-r.c3sl.ufpr.br");require(RColorBrewer);}
+  if(!require(cartography)){install.packages("cartography",repos="http://cran-r.c3sl.ufpr.br");require(cartography);}
+  if(!require(sp)){install.packages("sp",repos="http://cran-r.c3sl.ufpr.br");require(sp);}
+  if(!require(tmap)){install.packages("tmap",repos="http://cran-r.c3sl.ufpr.br");require(tmap);}
+  if(!require(rgdal)){install.packages("rgdal",repos="http://cran-r.c3sl.ufpr.br");require(rgdal);}
 
   #### Normalizando o dataset ####
   names(df) <- c('uf', 'total')
@@ -35,7 +45,9 @@ mapaBR <- function(df, titulo="Mapa", esquemaCor="Blues") {
   merged_df$total[is.na(merged_df$total)] <- 0 #substituindo NA por 0
 
   #### Gerando o mapa ####
-  pal <- colorBin(esquemaCor,domain = NULL,n=5) #cores do mapa
+  # titulo="Mapa"; esquemaCor="Blues"
+
+  pal <- colorBin(esquemaCor,domain = NULL,n=numeroCores) #cores do mapa
 
   state_popup <- paste0("<strong>Estado: </strong>",
                         merged_df$NM_ESTADO,
