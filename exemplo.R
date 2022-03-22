@@ -18,3 +18,4 @@ mapaBR(d)
 mapaBR(d, titulo = "Vendas por Estado")
 mapaBR(d, titulo = "Vendas por Estado", esquemaCor = 'YlGnBu')
 mapaBR(d, titulo = "Vendas por Estado", esquemaCor = 'YlGnBu', numeroCores = 10)
+

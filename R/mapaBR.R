@@ -23,7 +23,6 @@ options(warn = - 1)
   #### Normalizando o dataset ####
   names(df) <- c('uf', 'total')
 
-
   #### Importando shapefile (mapa do Brasil) ####
   shp <- readOGR("Mapa\\.", "BRUFE250GC_SIR", stringsAsFactors=FALSE, encoding="UTF-8")
 
